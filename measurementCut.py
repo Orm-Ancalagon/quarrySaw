@@ -1,9 +1,15 @@
 # hashses are single-line comments, three ''' are multiline comments
 
 from time import sleep # import the sleep function from the time module
-import sys # import some stuff needed to write out to console
 import RPi.GPIO as GPIO
+
 GPIO.setmode(GPIO.BCM)
+GPIO.setup(8, GPIO.OUT)
+GPIO.setup(10, GPIO.OUT)
+GPIO.setup(11, GPIO.OUT)
+GPIO.setup(17, GPIO.OUT)
+GPIO.setup(27, GPIO.OUT)
+
 ''' you need to define your various functions up here, e.g.
 def motorUp:
     lift table up blah blah'''
