@@ -74,7 +74,7 @@ def ynQuery():
 
 def motorUp():
 	GPIO.output(17, True)
-	sleep(10)
+	sleep(10)	# change this for the real world too
 	GPIO.output(17, False)
 	GPIO.cleanup()
     
@@ -116,20 +116,5 @@ for x in range(0, passesNumber)
 	motorDown()
 	sawTowards()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+pumpOff()
+motoUp()
