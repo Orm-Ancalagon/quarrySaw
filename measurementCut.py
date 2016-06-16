@@ -26,39 +26,39 @@ def howMuchToCut():
 	while True:
 		try:
 			global measurement
-			measurement = input("Please enter your measurement here")
+			measurement = input("Please enter your measurement here: \n")
 			measurement = float(measurement)
 		except ValueError:
-			print("Invalid entry, please enter a number")
+			print("Invalid entry, please enter a number: \n")
 			continue
 		else:
-			print("You have entered:", measurement)
+			print("You have entered: ", measurement)
 			break    
 
 def travelTime():
 	while True:
 		try:
 			global motionTime
-			motionTime = input("Please enter traveltime in seconds")
+			motionTime = input("Please enter traveltime in seconds: \n")
 			motionTime = float(motionTime)
 		except ValueError:
-			print(motionTime, "is not a valid input, please re-enter")
+			print(motionTime, "is not a valid input, please re-enter: \n")
 			continue
 		else:
-			print("You have entered:", motionTime)
+			print("You have entered: ", motionTime)
 			break
 
 def passes():
 	while True:
                 try:
                         global passesNumber
-                        passesNumber = input("Please enter traveltime in seconds")
-                        passesNumber = float(passesNumber)
+                        passesNumber = input("Please enter number of passes: \n")
+                        passesNumber = int(passesNumber)
                 except ValueError:
-                        print(passesNumber, "is not a valid number of passes, please re-enter")
+                        print(passesNumber, "is not a valid number of passes, please re-enter: \n")
                         continue
                 else:
-                        print("You have entered:", passesNumber)
+                        print("You have entered: ", passesNumber)
                         break
 
 # function below will ask if you want to proceed
@@ -96,12 +96,12 @@ def motorDown():
     
 def sawAway():      #this time needs to correspond travel time 
 	GPIO.output(18, GPIO.LOW)
-	sleep(travelTime)
+	sleep(motionTime)
 	GPIO.output(18, GPIO.HIGH)
 
 def sawTowards():
 	GPIO.output(22, GPIO.LOW)
-	sleep(traveTime)
+	sleep(motionTime)
 	GPIO.output(22, GPIO.HIGH)
 
 # PROGRAM STARTS BELOW!
@@ -111,9 +111,11 @@ while begin == 0:
 	sleep(1) # wait for 1 second
 	howMuchToCut()
 	travelTime()
+	passes()
 	ynQuery()
-
+sleep(3)
 pumpOn()
+sleep(3)
 
 for x in range(0, passesNumber):
 	motorDown()
@@ -122,4 +124,5 @@ for x in range(0, passesNumber):
 	sawTowards()
 
 pumpOff()
-motoUp()
+motorUp()
+GPIO.cleanup()

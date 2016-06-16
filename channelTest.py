@@ -1,7 +1,7 @@
 from time import sleep
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(17, GPIO.OUT)
+GPIO.setup(18, GPIO.OUT)
 
 measurement = 0
 
@@ -18,9 +18,9 @@ def getMeasurement():
 			break
 
 def powerPin():
-	GPIO.output(17, GPIO.HIGH)
+	GPIO.output(18, GPIO.HIGH)
 	sleep(measurement*2)
-	GPIO.output(17, GPIO.LOW)
+	GPIO.output(18, GPIO.LOW)
 
 getMeasurement()
 powerPin()
