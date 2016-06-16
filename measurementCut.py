@@ -4,11 +4,11 @@ from time import sleep # import the sleep function from the time module
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(8, GPIO.OUT)
-GPIO.setup(10, GPIO.OUT)
-GPIO.setup(11, GPIO.OUT)
-GPIO.setup(17, GPIO.OUT)
-GPIO.setup(27, GPIO.OUT)
+GPIO.setup(4, GPIO.OUT)		# pump
+GPIO.setup(7, GPIO.OUT)		# motorUp
+GPIO.setup(15, GPIO.OUT)	# motorDown
+GPIO.setup(18, GPIO.OUT)	# sawAway
+GPIO.setup(22, GPIO.OUT)	# sawTowards
 
 measurement = "blank"
 motionTime = "blank"
@@ -72,32 +72,32 @@ def ynQuery():
     	elif start != "y" and "n":
         	print("invalid input, please enter y/n")
 
+def pumpOn():
+	GPIO.output(4, True)
+
+def pumpOff():
+	GPIO.output(4, False)
+
 def motorUp():
-	GPIO.output(17, True)
+	GPIO.output(7, True)
 	sleep(10)	# change this for the real world too
-	GPIO.output(17, False)
+	GPIO.output(7, False)
 	GPIO.cleanup()
     
 def motorDown():
-	GPIO.output(27, True)
+	GPIO.output(15, True)
 	sleep(measurement * 1) # change this for physical world 
-	GPIO.output(27, False)
+	GPIO.output(15, False)
     
 def sawAway():      #this time needs to correspond travel time 
-	GPIO.output(10, True)
+	GPIO.output(18, True)
 	sleep(travelTime)
-	GPIO.output(10, False)
+	GPIO.output(18, False)
 
 def sawTowards():
-	GPIO.output(11, True)
+	GPIO.output(22, True)
 	sleep(traveTime)
-	GPIO.output(11, False)
-
-def pumpOn():
-	GPIO.output(8, True)
-
-def pumpOff():
-	GPIO.output(8, False)
+	GPIO.output(22, False)
 
 # PROGRAM STARTS BELOW!
 print("Welcome to sawOS v0.1. This program is provided with ABSOLUTELY NO WARRANTY and is used at your own risk")
