@@ -1,7 +1,5 @@
-# hashses are single-line comments, three ''' are multiline comments
-
-from time import sleep # import the sleep function from the time module
-import RPi.GPIO as GPIO
+from time import sleep		# import the sleep function from the time module
+import RPi.GPIO as GPIO		# GPIO module
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(4, GPIO.OUT)		# pump
@@ -21,8 +19,7 @@ motionTime = "blank"
 passesNumber = 0
 begin = 0
 
-# funtion below will ask for input and check if input is a number
-def howMuchToCut():
+def howMuchToCut():		# function asks measurement and checks if input is a number
 	while True:
 		try:
 			global measurement
@@ -32,10 +29,9 @@ def howMuchToCut():
 			print("Invalid entry, please enter a number: \n")
 			continue
 		else:
-			print("You have entered: ", measurement)
 			break    
 
-def travelTime():
+def travelTime():		# how long the saw takes to travel across the block
 	while True:
 		try:
 			global motionTime
@@ -45,10 +41,9 @@ def travelTime():
 			print(motionTime, "is not a valid input, please re-enter: \n")
 			continue
 		else:
-			print("You have entered: ", motionTime)
 			break
 
-def passes():
+def passes():			# number of times the saw moves away and towards
 	while True:
                 try:
                         global passesNumber
@@ -58,12 +53,14 @@ def passes():
                         print(passesNumber, "is not a valid number of passes, please re-enter: \n")
                         continue
                 else:
-                        print("You have entered: ", passesNumber)
                         break
 
-# function below will ask if you want to proceed
-def ynQuery():
-	start = input("Do you wish to begin cutting? (y/n)")
+def ynQuery():			# confirm entered depth and query to proceed
+	list = [measurement, motionTime, passesNumber]
+	print("You have entered:\n")
+	print ("\n".join(map(str,list)))
+
+	start = input("\nDo you wish to begin cutting? (y/n)")
 	str(start)
 	
 	if start == "y":
@@ -91,10 +88,10 @@ def motorUp():
     
 def motorDown():
 	GPIO.output(15, GPIO.LOW)
-	sleep(measurement * 1) # change this for physical world 
+	sleep(measurement * 1) 			# change this for physical world 
 	GPIO.output(15, GPIO.HIGH)
     
-def sawAway():      #this time needs to correspond travel time 
+def sawAway():
 	GPIO.output(18, GPIO.LOW)
 	sleep(motionTime)
 	GPIO.output(18, GPIO.HIGH)
@@ -110,14 +107,14 @@ while True:
 	print("Welcome to sawOS v0.1. This program is provided with ABSOLUTELY NO WARRANTY and is used at your own risk")
 
 	while begin == 0:
-		sleep(1) # wait for 1 second
+		sleep(1) 
 		howMuchToCut()
 		travelTime()
 		passes()
 		ynQuery()
-		pumpOn()
 
 	for x in range(0, passesNumber):
+		pumpOn()
 		motorDown()
 		sawAway()
 		motorDown()
@@ -125,10 +122,11 @@ while True:
 
 	pumpOff()
 	motorUp()
-	print("cut complete\n")
+	print("Cut complete\n")
 	sleep(3)
- 
+	
 	measurement = "blank"
 	motionTime = "blank"
 	passesNumber = 0
 	begin = 0
+
