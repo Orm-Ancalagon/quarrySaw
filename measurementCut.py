@@ -10,6 +10,12 @@ GPIO.setup(15, GPIO.OUT)	# motorDown
 GPIO.setup(18, GPIO.OUT)	# sawAway
 GPIO.setup(22, GPIO.OUT)	# sawTowards
 
+GPIO.output(4, GPIO.HIGH)	# all pins are high at program start
+GPIO.output(7, GPIO.HIGH)
+GPIO.output(15, GPIO.HIGH)
+GPIO.output(18, GPIO.HIGH)
+GPIO.output(22, GPIO.HIGH)
+
 measurement = "blank"
 motionTime = "blank"
 passesNumber = 0
@@ -62,42 +68,41 @@ def ynQuery():
 	
 	if start == "y":
 		global begin
-        	begin = 1
-        	print("Cutting at", measurement, "mm")
-        	print("Travel time is", motionTime, "s")
+		begin = 1
+		print("Cutting at", measurement, "mm")
+		print("Travel time is", motionTime, "s")
 
-    	if start == "n":
-        	print("Cut canceled")
-    
-    	elif start != "y" and "n":
-        	print("invalid input, please enter y/n")
+	if start == "n":
+		print("Cut canceled")
+
+	elif start != "y" and "n":
+		print("invalid input, please enter y/n")
 
 def pumpOn():
-	GPIO.output(4, True)
+	GPIO.output(4, GPIO.LOW)
 
 def pumpOff():
-	GPIO.output(4, False)
+	GPIO.output(4, GPIO.HIGH)
 
 def motorUp():
-	GPIO.output(7, True)
+	GPIO.output(7, GPIO.LOW)
 	sleep(10)	# change this for the real world too
-	GPIO.output(7, False)
-	GPIO.cleanup()
+	GPIO.output(7, GPIO.HIGH)
     
 def motorDown():
-	GPIO.output(15, True)
+	GPIO.output(15, GPIO.LOW)
 	sleep(measurement * 1) # change this for physical world 
-	GPIO.output(15, False)
+	GPIO.output(15, GPIO.HIGH)
     
 def sawAway():      #this time needs to correspond travel time 
-	GPIO.output(18, True)
+	GPIO.output(18, GPIO.LOW)
 	sleep(travelTime)
-	GPIO.output(18, False)
+	GPIO.output(18, GPIO.HIGH)
 
 def sawTowards():
-	GPIO.output(22, True)
+	GPIO.output(22, GPIO.LOW)
 	sleep(traveTime)
-	GPIO.output(22, False)
+	GPIO.output(22, GPIO.HIGH)
 
 # PROGRAM STARTS BELOW!
 print("Welcome to sawOS v0.1. This program is provided with ABSOLUTELY NO WARRANTY and is used at your own risk")
@@ -110,7 +115,7 @@ while begin == 0:
 
 pumpOn()
 
-for x in range(0, passesNumber)
+for x in range(0, passesNumber):
 	motorDown()
 	sawAway()
 	motorDown()
