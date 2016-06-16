@@ -86,7 +86,7 @@ def pumpOff():
 
 def motorUp():
 	GPIO.output(7, GPIO.LOW)
-	sleep(10)	# change this for the real world too
+	sleep(measurement * passesNumber)	# change this for the real world too
 	GPIO.output(7, GPIO.HIGH)
     
 def motorDown():
@@ -105,24 +105,30 @@ def sawTowards():
 	GPIO.output(22, GPIO.HIGH)
 
 # PROGRAM STARTS BELOW!
-print("Welcome to sawOS v0.1. This program is provided with ABSOLUTELY NO WARRANTY and is used at your own risk")
+while True:
 
-while begin == 0:
-	sleep(1) # wait for 1 second
-	howMuchToCut()
-	travelTime()
-	passes()
-	ynQuery()
-sleep(3)
-pumpOn()
-sleep(3)
+	print("Welcome to sawOS v0.1. This program is provided with ABSOLUTELY NO WARRANTY and is used at your own risk")
 
-for x in range(0, passesNumber):
-	motorDown()
-	sawAway()
-	motorDown()
-	sawTowards()
+	while begin == 0:
+		sleep(1) # wait for 1 second
+		howMuchToCut()
+		travelTime()
+		passes()
+		ynQuery()
+		pumpOn()
 
-pumpOff()
-motorUp()
-GPIO.cleanup()
+	for x in range(0, passesNumber):
+		motorDown()
+		sawAway()
+		motorDown()
+		sawTowards()
+
+	pumpOff()
+	motorUp()
+	print("cut complete\n")
+	sleep(3)
+ 
+	measurement = "blank"
+	motionTime = "blank"
+	passesNumber = 0
+	begin = 0
