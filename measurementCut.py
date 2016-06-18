@@ -55,10 +55,14 @@ def passes():			# number of times the saw moves away and towards
                 else:
                         break
 
+def print_row(measurement, motionTime, passesNumber):		# nice UI row output to confirm what's been entered
+		print(" %-45s %-30s %15s " % (measurement, traveltime, passes))
+
+
 def ynQuery():			# confirm entered depth and query to proceed
-	list = [measurement, motionTime, passesNumber]
-	print("You have entered:\n")
-	print ("\n".join(map(str,list)))
+
+	print_row("Measurement /mm", "Travel-Time /s", "Number of Passes")
+	print_row(measurement, motionTime, passesNumber) 
 
 	start = input("\nDo you wish to begin cutting? (y/n)")
 	str(start)
