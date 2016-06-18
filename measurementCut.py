@@ -56,7 +56,7 @@ def passes():			# number of times the saw moves away and towards
                         break
 
 def print_row(measurement, motionTime, passesNumber):		# nice UI row output to confirm what's been entered
-		print(" %-45s %-30s %15s " % (measurement, traveltime, passes))
+		print(" %-45s %-30s %15s " % (measurement, motionTime, passesNumber))
 
 
 def ynQuery():			# confirm entered depth and query to proceed
@@ -70,8 +70,7 @@ def ynQuery():			# confirm entered depth and query to proceed
 	if start == "y":
 		global begin
 		begin = 1
-		print("Cutting at", measurement, "mm")
-		print("Travel time is", motionTime, "s")
+		print("Cutting in progress...")
 
 	if start == "n":
 		print("Cut canceled")
