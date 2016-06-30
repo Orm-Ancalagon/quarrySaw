@@ -9,7 +9,7 @@ class LED(object):
 	GPIO.setup(18, GPIO.OUT)
 	GPIO.setup(22, GPIO.OUT)
 	
-	GPIO.output(4, GPIO.HIGH)
+	GPIO.output(4, GPIO.HIGH) # high = off
 	GPIO.output(7, GPIO.HIGH)
 	GPIO.output(15, GPIO.HIGH)
 	GPIO.output(18, GPIO.HIGH)
@@ -23,8 +23,15 @@ class LED(object):
 		self.red    = 	GPIO.output(18, red)
 		self.white  =	GPIO.output(22, white)
 
-yellowLED = LED(GPIO.HIGH, pass, pass, pass, pass,)
-
+yellowLED = LED(GPIO.LOW,GPIO.HIGH,GPIO.HIGH,GPIO.HIGH,GPIO.HIGH)
 sleep(3)
+
+orangeLED = LED(GPIO.HIGH,GPIO.LOW,GPIO.HIGH,GPIO.HIGH,GPIO.HIGH)
+sleep(3)
+
+greenLED = LED(GPIO.HIGH,GPIO.HIGH,GPIO.LOW,GPIO.HIGH,GPIO.HIGH)
+sleep(3)
+
+
 GPIO.cleanup()	
 		
