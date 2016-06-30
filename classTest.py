@@ -1,12 +1,30 @@
+from time import sleep
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 
-class LED(object)
-	GPIO.setup(8, GPIO.OUT)
-	GPIO.setup(10, GPIO.OUT)
-	GPIO.setup(11, GPIO.OUT)
-	GPIO.setup(17, GPIO.OUT)
-	GPIO.setup(27, GPIO.OUT)
+class LED(object):
+	GPIO.setup(4, GPIO.OUT)
+	GPIO.setup(7, GPIO.OUT)
+	GPIO.setup(15, GPIO.OUT)
+	GPIO.setup(18, GPIO.OUT)
+	GPIO.setup(22, GPIO.OUT)
 	
-	def __init__(self, green, red, white, orange, yellow)
-		self.green = green
+	GPIO.output(4, GPIO.HIGH)
+	GPIO.output(7, GPIO.HIGH)
+	GPIO.output(15, GPIO.HIGH)
+	GPIO.output(18, GPIO.HIGH)
+	GPIO.output(22, GPIO.HIGH)
+
+	
+	def __init__(self, yellow, orange, green, red, white):
+		self.yellow = 	GPIO.output(4, yellow)
+		self.orange = 	GPIO.output(7, orange)
+		self.green  = 	GPIO.output(15, green)
+		self.red    = 	GPIO.output(18, red)
+		self.white  =	GPIO.output(22, white)
+
+yellowLED = LED(GPIO.HIGH, pass, pass, pass, pass,)
+
+sleep(3)
+GPIO.cleanup()	
+		
